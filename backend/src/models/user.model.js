@@ -41,7 +41,10 @@ userSchema.statics.hashPassword = async function (password) { // https://chatgpt
      return jwt.sign({
           _id:this._id
       },
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,
+      {
+        expiresIn:process.env.TOKEN_EXPIRY
+      }
   )
   }
 
