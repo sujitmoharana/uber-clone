@@ -28,7 +28,7 @@ export const registerUser = asynchandler(async(req,res,next)=>{
     const token = user.generateAuthToken();
   console.log("token",token);
   
-    res.status(200).json(
+   return res.status(200).json(
         new Apiresponse(200,{token,user},"register sucessfully")
     )
 })
@@ -59,13 +59,13 @@ export const loginuser = asynchandler(async(req,res,next)=>{
         const token =await user.generateAuthToken();
         console.log(token);
         
-        res.status(200).cookie("token",token).json(
+        return res.status(200).cookie("token",token).json(
             new Apiresponse(200,{token,user},"login sucessfully")
         )        
 })
 
 export const getUserProfile = asynchandler(async(req,res,next)=>{
-       res.status(200).json(
+       return res.status(200).json(
         new Apiresponse(200,{user:req.user})
        )
 })
@@ -91,7 +91,7 @@ solution=>https://chatgpt.com/s/t_687be0cf2e18819191889425aa6e5058
     console.log("after clear cookie token",token);
      const tokesset = await blacklistToken.create({token});
     console.log("tokenset",tokesset);
-   res.status(200).json(
+  return res.status(200).json(
     new Apiresponse(200,{},"logged out sucessfully")
    )
 
