@@ -1,16 +1,19 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './pages/home'
 import Userlogin from './pages/Userlogin'
 import Usersignup from './pages/Usersignup'
 import Captainlogin from './pages/Captainlogin'
 import Captainsignup from './pages/Captainsignup'
+import Start from './pages/Start'
+import Home from './pages/home'
+import UserProtectedrapper from './pages/userProtectedrapper'
+import Userlogout from './pages/Userlogout'
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path:"/",
-      element:<Home/>
+      element:<Start/>
     },
     {
       path:"/login",
@@ -27,6 +30,22 @@ const App = () => {
     {
       path:"/captain-signup",
       element:<Captainsignup/>
+    },
+    {
+      path:"/home",
+      element:(
+        <UserProtectedrapper>
+          <Home/>
+        </UserProtectedrapper>
+      )
+    },{
+      path:"/user/logout",
+      element:(
+        <UserProtectedrapper>
+          <Userlogout/>
+        </UserProtectedrapper>
+      )
+
     }
   ])
   return (

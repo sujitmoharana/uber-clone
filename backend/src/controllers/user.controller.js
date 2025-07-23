@@ -87,7 +87,7 @@ export const logoutuser = asynchandler(async(req,res,next)=>{
 solution=>https://chatgpt.com/s/t_687be0cf2e18819191889425aa6e5058
     */
     res.clearCookie('token');
-    const token = req.cookies.token || req.header("Authorization")?.replace("bearer ","");
+    const token = req.cookies.token || req.header("Authorization")?.replace(/bearer\s+/i, "");
     console.log("after clear cookie token",token);
      const tokesset = await blacklistToken.create({token});
     console.log("tokenset",tokesset);

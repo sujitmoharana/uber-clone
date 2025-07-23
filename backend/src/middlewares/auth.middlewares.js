@@ -6,7 +6,7 @@ import { blacklistToken } from "../models/blacklistToken.model.js";
 import { captainModel } from "../models/captain.model.js";
 
 export const authuser = async(req,res,next)=>{
-    const token = req.cookies.token || req.header("Authorization")?.replace("bearer ","");
+    const token = req.cookies.token || req.header("Authorization")?.replace(/bearer\s+/i, "");
     console.log("incomming token",token);
     
     if (!token) {
@@ -17,7 +17,8 @@ export const authuser = async(req,res,next)=>{
     console.log("isblacklisted",isblacklisted);
     
     if (isblacklisted) {
-       return  res.status(400).json({message:"Unauthoraized"})
+        console.log("hello i am blacklisted");
+        throw new ApiError(400,"isblacklisted token")
     }
     try {
         const decoded = jwt.verify(token,process.env.JWT_SECRET)

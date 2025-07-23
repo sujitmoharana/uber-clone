@@ -6,9 +6,14 @@ import App from './App.jsx'
 import { Bioprovider } from './context/UserContext.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <> {/* here i delete this strict mode for twice rending so i have logout problem ...here 
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/logout`,{
+    headers: {
+        Authorization: `Bearer ${token}`  // ✅ Capital B
+      }
+})  this code run twice so i have problem thats why i delete it */}
     <Bioprovider>
     <App />
     </Bioprovider>
-  </StrictMode>,
+  </>,
 )

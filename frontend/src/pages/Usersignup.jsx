@@ -1,19 +1,29 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom';
-
+import React, { useContext, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Biocontext } from '../context/UserContext';
 const Usersignup = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [firstname, serFirstname] = useState("")
     const [lastname, setLastname] = useState("")
     const [captaindata, setCaptaindata] = useState({})
-
-
-    const submitHandler = (e)=>{
+    const navigate = useNavigate();
+    const {user,setUser} = useContext(Biocontext)
+    const submitHandler = async(e)=>{
         e.preventDefault();
         console.log(email,password,firstname,lastname);
-        setCaptaindata({email:email,password:password,fullname:{firstname:firstname,lastname:lastname}})
+        const newuser = {email:email,password:password,fullname:{firstname:firstname,lastname:lastname}}
         console.log(captaindata);
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`,newuser)
+        console.log(response);
+        if (response.status ===200) {
+            const data = response.data
+            setUser(data.user)
+            localStorage.setItem('token',data.token);
+            navigate("/home")
+        }
+        
         setEmail('');
         setPassword('');
         serFirstname('');
@@ -34,7 +44,7 @@ const Usersignup = () => {
     <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} className='bg-[#eeeeee] py-2 px-3.5  border-black block w-full' required placeholder='email@example.com' />
     <h3 className='text-lg font-medium mt-4 mb-2'>Enter Password</h3>
     <input type="password" value={password}  onChange={(e)=>setPassword(e.target.value)} className='bg-[#eeeeee] py-2 px-3.5   border-black block w-full' required placeholder='password' />
-    <button className='w-full h-10 rounded mt-7 bg-black text-white'>login</button>
+    <button  className='w-full h-10 rounded mt-7 bg-black text-white'>Create an account</button>
     </form>
     <p className='text-center mt-2.5'>Already have a account?<NavLink to="/login" className="text-blue-500"> Log in here</NavLink></p>
     </div>

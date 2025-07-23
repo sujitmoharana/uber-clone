@@ -11,7 +11,7 @@ export const Bioprovider = ({children})=>{
         }
     })
   return (
-  <Biocontext.Provider value={[user,setUser]}>
+  <Biocontext.Provider value={{user,setUser}}>
    {children}
   </Biocontext.Provider>)
 }
