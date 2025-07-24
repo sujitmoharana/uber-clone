@@ -35,7 +35,7 @@ export const authuser = async(req,res,next)=>{
 }
 
 export const authcaptain = async(req,res,next)=>{
-    const token = req.cookies.token || req.header("Authorization")?.replace("bearer ","");
+    const token = req.cookies.token || req.header("Authorization")?.replace(/bearer\s+/i, "");
     console.log("incomming token",token);
     
     if (!token) {

@@ -8,6 +8,9 @@ import Start from './pages/Start'
 import Home from './pages/home'
 import UserProtectedrapper from './pages/userProtectedrapper'
 import Userlogout from './pages/Userlogout'
+import Captainhome from './pages/Captainhome'
+import Captainprotectedrapper from './pages/Captainprotectedrapper'
+import Captainlogout from './pages/Captainlogout'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -46,6 +49,19 @@ const App = () => {
         </UserProtectedrapper>
       )
 
+    },{
+      path:"/captain-home",
+      element:(
+        <Captainprotectedrapper>
+          <Captainhome/>
+        </Captainprotectedrapper>
+      )
+    },
+    {
+      path:"/captain/logout",
+      element:<Captainprotectedrapper>
+        <Captainlogout/>
+      </Captainprotectedrapper>
     }
   ])
   return (

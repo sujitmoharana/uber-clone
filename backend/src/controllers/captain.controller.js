@@ -64,7 +64,7 @@ export const getcaptainProfile = asynchandler(async(req,res,next)=>{
 
 export const logoutCaptain = asynchandler(async(req,res,next)=>{
     res.clearCookie('token');
-    const token = req.cookies.token || req.header("Authorization")?.replace("bearer ","");
+    const token = req.cookies.token || req.header("Authorization")?.replace(/bearer\s+/i, "");
     await blacklistToken.create({
         token
     })
