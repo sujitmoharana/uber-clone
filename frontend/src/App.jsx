@@ -11,6 +11,8 @@ import Userlogout from './pages/Userlogout'
 import Captainhome from './pages/Captainhome'
 import Captainprotectedrapper from './pages/Captainprotectedrapper'
 import Captainlogout from './pages/Captainlogout'
+import Riding from './pages/Riding'
+import CaptainRiding from './pages/CaptainRiding'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -21,6 +23,14 @@ const App = () => {
     {
       path:"/login",
       element:<Userlogin/>
+    },
+    {
+     path:'/riding',
+     element:<Riding/>
+    },
+    {
+    path:"/captain-riding",
+    element:<CaptainRiding/>
     },
     {
       path:"/signup",
